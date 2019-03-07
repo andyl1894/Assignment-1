@@ -37,51 +37,71 @@ namespace Assignment1_S19
 
 
         public static void printPrimeNumbers(int x , int y) {
+            try
+            {
 
-            int primecheck;
-            int count = 0; // This is literally just to decide whether a number should have a leading comma. Spent too long on this.
-            for (int i = x; i <= y; i++) {
-                primecheck = 0;
-                for (int j = 2; j < i; j++)
+                int primecheck;
+                int count = 0; // This is literally just to decide whether a number should have a leading comma. Spent too long on this.
+                for (int i = x; i <= y; i++)
                 {
-                    if (i % j == 0)
-                        primecheck = 1;
+                    primecheck = 0;
+                    for (int j = 2; j < i; j++)
+                    {
+                        if (i % j == 0)
+                            primecheck = 1;
+                    }
+                    if (primecheck == 0)
+                    {
+                        count++;
+                        if (count == 1)
+                            Console.Write(i);
+                        else
+                            Console.Write(", " + i);
+                    }
                 }
-                if (primecheck == 0)
-                {
-                    count++;
-                    if (count == 1)
-                        Console.Write(i);
-                    else
-                    Console.Write(", " + i);
-                }
+                Console.WriteLine("");
             }
-            Console.WriteLine("");
+            catch
+            {
+                Console.WriteLine("Exception occured while computing printPrimeNumbers()");
+            }
+
+
         }
 
 
 
         public static decimal getSeriesResult(int n)
         {
-
-            int numerator;
-            decimal part = 0;
-            decimal sequence = 0; // I stuck to decimals, please don't knock off points
-
-            for (int i = 1; i <= n; i++)
+            try
             {
-                numerator = 1;
-                for (int j = 1; j <= i; j++)
+                int numerator;
+                decimal part = 0;
+                decimal sequence = 0; // I stuck to decimals, please don't knock off points
+
+                for (int i = 1; i <= n; i++)
                 {
-                    numerator = numerator * j;
+                    numerator = 1;
+                    for (int j = 1; j <= i; j++)
+                    {
+                        numerator = numerator * j;
+                    }
+                    part = (numerator / Convert.ToDecimal(i + 1));
+                    if (i % 2 == 0)
+                        sequence = sequence - part;
+                    else
+                        sequence = sequence + part;
                 }
-                part = (numerator /   Convert.ToDecimal(i + 1));
-                if (i % 2 == 0)
-                    sequence = sequence - part;
-                else
-                    sequence = sequence + part;              
+                return sequence;
             }
-            return sequence;
+
+            catch
+            {
+                Console.WriteLine("Exception occured while computing getSeriesResult()");
+                return 0;
+            }
+
+
         }
 
 
@@ -89,45 +109,63 @@ namespace Assignment1_S19
 
         public static void printTriangle(int n)
         {
-            for (int i=1; i<=n; i++)
+            try
             {
-                for (int sp = 1; sp <= n-i; sp++)
+                for (int i = 1; i <= n; i++)
                 {
+                    for (int sp = 1; sp <= n - i; sp++)
+                    {
 
-                    Console.Write(" ");
+                        Console.Write(" ");
 
+                    }
+                    for (int j = 1; j <= (i * 2) - 1; j++) // The hardest part was deciding how to sequence up the stars
+                    {
+                        Console.Write("*");
+
+                    }
+                    Console.WriteLine();
                 }
-                for (int j=1; j <= (i*2)-1 ; j++) // The hardest part was deciding how to sequence up the stars
-                {
-                    Console.Write("*");
-
-                }
-                Console.WriteLine();
             }
+
+            catch
+            {
+                Console.WriteLine("Exception occured while computing printTriangle()");
+            }
+
+
         }
 
 
 
         public static void computeFrequency(int[] a)
         {
-            int largest = 0;
-            int count = 0;
-            foreach (int value in a) // For Each made this extremely easy
+            try
             {
-                if (value > largest)
-                    largest = value;
-            }
-            for (int i=1;i<=largest;i++)
-            {
-                Console.Write(i + ":   ");
-                foreach (int value in a)
+                int largest = 0;
+                int count = 0;
+                foreach (int value in a) // For Each made this extremely easy
                 {
-                    if (value == i)
-                        count++;
+                    if (value > largest)
+                        largest = value;
                 }
-                Console.WriteLine(count);
-                count = 0;
-            }        
+                for (int i = 1; i <= largest; i++)
+                {
+                    Console.Write(i + ":   ");
+                    foreach (int value in a)
+                    {
+                        if (value == i)
+                            count++;
+                    }
+                    Console.WriteLine(count);
+                    count = 0;
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Exception occured while computing computeFrequency()");
+            }
+
         }
 
 
